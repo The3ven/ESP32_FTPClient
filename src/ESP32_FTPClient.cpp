@@ -1,5 +1,7 @@
 #include "ESP32_FTPClient.h"
 
+ESP32_FTPClient::ESP32_FTPClient(){}
+
 ESP32_FTPClient::ESP32_FTPClient(char *_serverAdress, uint16_t _port, char *_userName, char *_passWord, uint16_t _timeout, uint8_t _verbose)
 {
   userName = _userName;
@@ -11,6 +13,26 @@ ESP32_FTPClient::ESP32_FTPClient(char *_serverAdress, uint16_t _port, char *_use
 }
 
 ESP32_FTPClient::ESP32_FTPClient(char *_serverAdress, char *_userName, char *_passWord, uint16_t _timeout, uint8_t _verbose)
+{
+  userName = _userName;
+  passWord = _passWord;
+  serverAdress = _serverAdress;
+  port = 21;
+  timeout = _timeout;
+  verbose = _verbose;
+}
+
+void ESP32_FTPClient::setConfig(char *_serverAdress, uint16_t _port, char *_userName, char *_passWord, uint16_t _timeout, uint8_t _verbose)
+{
+  userName = _userName;
+  passWord = _passWord;
+  serverAdress = _serverAdress;
+  port = _port;
+  timeout = _timeout;
+  verbose = _verbose;
+}
+
+void ESP32_FTPClient::setConfig(char *_serverAdress, char *_userName, char *_passWord, uint16_t _timeout, uint8_t _verbose)
 {
   userName = _userName;
   passWord = _passWord;
@@ -121,10 +143,11 @@ void ESP32_FTPClient::GetFTPAnswer(char *result, int offsetStart)
   if (result != NULL)
   {
     FTPdbgn("Result start");
-    // Deprecated
+    // Deprecated // but fixed
+    int j = 0;
     for (int i = offsetStart; i < sizeof(outBuf); i++)
     {
-      result[i] = outBuf[i - offsetStart];
+      result[j] = outBuf[i];
     }
     FTPdbg("Result: ");
     // Serial.write(result);

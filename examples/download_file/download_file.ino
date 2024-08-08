@@ -22,7 +22,7 @@ char ftp_server[] = "files.000webhost.com";
 char ftp_user[]   = "";
 char ftp_pass[]   = "";
 
-ESP32_FTPClient ftp (ftp_server,ftp_user,ftp_pass);
+ESP32_FTPClient ftp;
 
 void setup()
 {
@@ -42,7 +42,7 @@ void setup()
   Serial.print("\nMax Free Heap: ");
   Serial.println(ESP.getMaxAllocHeap());
   Serial.println("");
-
+  ftp.setConfig(ftp_server,ftp_user,ftp_pass);
   ftp.OpenConnection();
 
   //Change directory
