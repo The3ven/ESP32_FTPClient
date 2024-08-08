@@ -3,6 +3,8 @@
 ESP32-CAM remote image access via FTP. Take pictures with ESP32 and upload it via FTP making it accessible for the outisde network. 
 Leonardo Bispo
 July - 2019
+the3ven
+Aug - 2024
 https://github.com/ldab/ESP32_FTPClient
 
 Distributed as-is; no warranty is given.
