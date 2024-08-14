@@ -125,6 +125,7 @@ void ESP32_FTPClient::GetFTPAnswer(char *result, int offsetStart)
       outCount++;
       outBuf[outCount] = 0;
     }
+    delay(100);
   }
 
   String res = String(outBuf);
@@ -321,6 +322,18 @@ void ESP32_FTPClient::MakeDir(const char *dir)
   GetCmdClient()->print(F("MKD "));
   GetCmdClient()->println(F(dir));
   GetFTPAnswer();
+}
+
+String ESP32_FTPClient::CurrentWorkingDir()
+{
+  FTPdbgn("Send PWD");
+  if (!isConnected())
+    return "";
+  char _resp[sizeof(outBuf)];
+  GetCmdClient()->print(F("PWD"));
+  GetFTPAnswer(_resp);
+  String resp = String(_resp);
+  return resp.substring(resp.indexOf('"') + 1, resp.lastIndexOf('"'));
 }
 
 void ESP32_FTPClient::ContentList(const char *dir, String *list)

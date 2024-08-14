@@ -68,6 +68,7 @@ public:
   void ChangeWorkDir(const char *dir);
   void DeleteFile(const char *file);
   void MakeDir(const char *dir);
+  String CurrentWorkingDir();
   void ContentList(const char *dir, String *list);
   void ContentListWithListCommand(const char *dir, String *list);
   void DownloadString(const char *filename, String &str);
